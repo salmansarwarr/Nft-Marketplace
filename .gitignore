@@ -2,11 +2,11 @@
 node_modules
 
 # Ignore build directories
-/.next
-/dist
-/.hardhat
-/artifacts
-/cache
+.next
+dist
+.hardhat
+artifacts
+cache
 
 # Ignore environment-specific files
 .env
