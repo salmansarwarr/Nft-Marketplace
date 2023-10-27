@@ -5,16 +5,21 @@ import { ConnectButton } from "web3uikit";
 
 const Header = () => {
     return (
-        <nav className="p-5 border-b-2 flex flex-row justify-between items-center">
-            <h1 className="p-4 font-bold text-3xl">NFT Marketplace</h1>
-            <div className="flex flex-row items-center">
-                <Link className="mr-4 p-6 hover:underline" href="/">Home</Link>
-                <Link className="mr-4 p-6 hover:underline" href="/sell-nft">Sell NFT</Link>
-                <ConnectButton moralisAuth={false}/>
+        <nav className="p-3 md:p-5 border-b-2 flex flex-col md:flex-row items-center">
+            <h1 className="p-4 font-bold text-2xl md:text-3xl">
+                NFT Marketplace
+            </h1>
+            <div className="flex flex-col md:flex-row items-center md:items-center">
+                <Link className="p-2 md:mr-4 hover:underline" href="/">
+                    Home
+                </Link>
+                <Link className="p-2 md:mr-4 hover:underline" href="/sell-nft">
+                    Sell NFT
+                </Link>
+                <ConnectButton moralisAuth={false} />
             </div>
         </nav>
     );
 };
 
 export default Header;
-

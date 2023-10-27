@@ -1,4 +1,4 @@
-import { Address, BigInt } from "@graphprotocol/graph-ts";
+import { Address, BigInt, store } from "@graphprotocol/graph-ts";
 import {
     ItemBought as ItemBoughtEvent,
     ItemCanceled as ItemCanceledEvent,
@@ -39,6 +39,9 @@ export function handleItemCanceled(event: ItemCanceledEvent): void {
     let activeItem = ActiveItem.load(
         getIdFromEventParams(event.params.tokenId, event.params.nftAddress)
     );
+    let itemListed = ItemListed.load(
+        getIdFromEventParams(event.params.tokenId, event.params.nftAddress)
+    );
     if (!itemCancelled) {
         itemCancelled = new ItemCanceled(
             getIdFromEventParams(event.params.tokenId, event.params.nftAddress)
@@ -48,12 +51,22 @@ export function handleItemCanceled(event: ItemCanceledEvent): void {
     itemCancelled.seller = event.params.seller;
     itemCancelled.nftAddress = event.params.nftAddress;
     itemCancelled.tokenId = event.params.tokenId;
-    activeItem!.buyer = Address.fromString(
-        "0x000000000000000000000000000000000000dEaD"
-    );
+
+    if (activeItem) {
+        store.remove(
+            "ActiveItem",
+            getIdFromEventParams(event.params.tokenId, event.params.nftAddress)
+        );
+    }
+
+    if(itemListed) {
+        store.remove(
+            "ItemListed",
+            getIdFromEventParams(event.params.tokenId, event.params.nftAddress)
+        )
+    }
 
     itemCancelled.save();
-    activeItem!.save();
 }
 
 export function handleItemListed(event: ItemListedEvent): void {

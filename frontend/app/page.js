@@ -31,18 +31,17 @@ const Home = () => {
 
     return (
         <div className="container mx-auto">
-            <h1 className="py-4 px-4 font-bold text-2xl">Recently Listed</h1>
+            <h1 className="py-4 px-4 font-bold text-2xl text-center sm:text-left">Recently Listed</h1>
             {isWeb3Enabled && chainId ? (
                 loading || !data ? (
                     <>Loading...</>
                 ) : (
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
                         {listedfNfts.map((nft) => {
                             const {
                                 seller,
                                 tokenId,
                                 nftAddress,
-
                                 price,
                             } = nft;
                             return (
