@@ -42,7 +42,6 @@ const NFTBox = ({ price, nftAddress, tokenId, seller, marketPlace }) => {
         params: {
             tokenId: tokenId,
         },
-        gasLimit: 2000
     });
 
     const { runContractFunction: buyItem } = useWeb3Contract({
@@ -54,7 +53,6 @@ const NFTBox = ({ price, nftAddress, tokenId, seller, marketPlace }) => {
             nftAddress: nftAddress,
             tokenId: tokenId,
         },
-        
     });
 
     const { runContractFunction: cancelListing } = useWeb3Contract({
@@ -65,7 +63,6 @@ const NFTBox = ({ price, nftAddress, tokenId, seller, marketPlace }) => {
             nftAddress: nftAddress,
             tokenId: tokenId,
         },
-        gasLimit: 3e7
     });
 
     const updateUI = async () => {
@@ -167,7 +164,6 @@ const NFTBox = ({ price, nftAddress, tokenId, seller, marketPlace }) => {
                                     <Image
                                         loader={() => imageURI}
                                         src={imageURI}
-                                        alt="nft"
                                         height="200"
                                         width="200"
                                     />
@@ -180,8 +176,8 @@ const NFTBox = ({ price, nftAddress, tokenId, seller, marketPlace }) => {
                                     </div>
                                     {seller === account && (
                                         <button
-                                            onClick={async () => {
-                                                await cancelListing({
+                                            onClick={() => {
+                                                cancelListing({
                                                     onSuccess: handleCancelItemSuccess,
                                                     onError: (error) => console.log(error),
                                                 });
